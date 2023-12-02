@@ -1,0 +1,27 @@
+diff -Naur ./qtwebflix.orig/src/mainwindow.cpp ./qtwebflix/src/mainwindow.cpp
+--- ./qtwebflix.orig/src/mainwindow.cpp	2023-10-15 09:47:02.303631864 -0400
++++ ./qtwebflix/src/mainwindow.cpp	2023-10-15 09:49:15.784590934 -0400
+@@ -95,7 +95,7 @@
+   keyCtrlF5->setKey(Qt::CTRL + Qt::Key_F5); // Set the key code
+   connect(keyCtrlF5, SIGNAL(activated()), this, SLOT(slotShortcutCtrlF5()));
+ 
+-  this->webview->page()->profile()->setHttpUserAgent("Mozilla/5.0 (X11; Linux x86_64; rv:89.0) Gecko/20100101 Firefox/89.0");
++  this->webview->page()->profile()->setHttpUserAgent("Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0");
+ 
+   // Connect finished loading boolean
+   connect(webview, &QWebEngineView::loadFinished, this,
+@@ -135,12 +135,12 @@
+ void MainWindow::exchangeMprisInterfaceIfNeeded() {
+   QString hostname = webview->url().host();
+   if (hostname.endsWith("netflix.com")) {
+-      //this->webview->page()->profile()->setHttpUserAgent("Mozilla/5.0 (X11; Linux x86_64; rv:68.0) Gecko/20100101 Firefox/68.0");
++      //this->webview->page()->profile()->setHttpUserAgent("Mozilla/5.0 (X11; Linux x86_64; rv:109.0) Gecko/20100101 Firefox/118.0");
+     setMprisInterface<NetflixMprisInterface>();
+   } else if (hostname.endsWith("amazon.com")) {
+       //use javascript to change useragent to watch HD Amazon Prime Videos as using QT crashes the program.
+       QString code = "window.navigator.__defineGetter__('userAgent', function () {"
+-                  "return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/68.0.3440.84 Safari/537.36 OPR/55.0.2994.34 (Edition beta)';"
++                  "return 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36';"
+               "});";
+ 
+ 

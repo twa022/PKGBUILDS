@@ -1,0 +1,48 @@
+# Maintainer: Jan Neumann <neum dot ja at gmail dot com>
+
+
+_pkgname=qtwebflix
+pkgname=${_pkgname}-git
+pkgver=0.1.r190.g54c2c1b
+pkgrel=1
+pkgdesc='Standalone HD Streaming Video Browser using qt5-webengine'
+arch=('x86_64')
+url='https://github.com/gort818/qtwebflix'
+license=('GPL3')
+depends=('xdg-utils' 'qt5-webengine')
+optdepends=('google-chrome: Widevine plugin needed for some streaming services'
+            'chromium-widevine: Widevine plugin needed for some streaming services')
+makedepends=('git')
+source=("git+${url}.git"
+        "${_pkgname}.desktop"
+        'update_user_agent.patch')
+       
+sha256sums=('SKIP'
+            '7b15975f63818493b965926c336e37b8716f9550d23058fc9057004d3f7ffb2f'
+            'b0b170a23400c1e433bb31f4c69c7fe3e15f04b49703f3b874547c47e4d18f99')
+       
+pkgver() {
+   cd "${_pkgname}"
+   git describe --long --tags | sed 's/^v//;s/\([^-]*-g\)/r\1/;s/-/./g'
+
+}
+   
+prepare() {
+   cd "${_pkgname}"
+   git submodule init
+   git submodule update
+   patch -uNp2 -r- -i ../update_user_agent.patch
+}
+
+build() {
+   cd "${_pkgname}"
+   mkdir build && cd build
+   qmake-qt5 -config release ..
+   make
+}
+
+package() {
+   install -Dm755 ${srcdir}/${_pkgname}/build/${_pkgname} ${pkgdir}/usr/bin/${_pkgname}
+   install -Dm644 ${srcdir}/${_pkgname}/resources/qtwebflix.svg ${pkgdir}/usr/share/pixmaps/qtwebflix.svg
+   install -Dm644 ${srcdir}/${_pkgname}.desktop ${pkgdir}/usr/share/applications/${_pkgname}.desktop}
+}
