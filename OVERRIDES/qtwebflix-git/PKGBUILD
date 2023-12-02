@@ -3,6 +3,7 @@
 
 _pkgname=qtwebflix
 pkgname=${_pkgname}-git
+epoch=1
 pkgver=0.1.r190.g54c2c1b
 pkgrel=1
 pkgdesc='Standalone HD Streaming Video Browser using qt5-webengine'
