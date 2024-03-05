@@ -1,0 +1,36 @@
+# Maintainer: nsz32 <nszabo2 at gmail dot com>
+
+_pkgname=xfce4-docklike-plugin
+pkgname=${_pkgname}-git
+epoch=1
+pkgver=0.4.2.r10.gbd2c870
+pkgrel=1
+pkgdesc='A modern, docklike, minimalist taskbar for XFCE'
+arch=('i686' 'x86_64')
+url='https://gitlab.xfce.org/panel-plugins/xfce4-docklike-plugin'
+license=('GPL3')
+depends=('xfce4-panel' 'libxfce4windowing>=4.19.3' 'gtk-layer-shell')
+makedepends=('git' 'xfce4-dev-tools' 'intltool')
+
+source=(git+${url})
+sha512sums=('SKIP')
+
+pkgver() {
+	cd ${_pkgname}
+	git describe --long --tags | sed "s|xfce4-docklike-plugin-||g" | sed 's/\([^-]*-g\)/r\1/;s/-/./g'
+}
+
+prepare() {
+	cd ${_pkgname}
+	./autogen.sh
+}
+
+build() {
+	cd ${_pkgname}
+	make
+}
+
+package() {
+	cd ${_pkgname}
+	make DESTDIR="${pkgdir}" install
+}
