@@ -1,0 +1,26 @@
+pkgbase = superpaper
+	pkgdesc = Cross-platform multi monitor wallpaper manager
+	pkgver = 2.3.2
+	pkgrel = 1
+	url = https://github.com/mauro-lanza/superpaper-next
+	arch = any
+	license = MIT
+	makedepends = python-build
+	makedepends = python-installer
+	makedepends = python-wheel
+	makedepends = python-setuptools
+	makedepends = git
+	depends = python-pillow>=7.0.0
+	depends = python-screeninfo>=0.6.1
+	depends = python-wxpython
+	depends = python-system_hotkey>=1.0.5
+	depends = python-xpybutil
+	depends = python-numpy
+	depends = python-xcffib
+	depends = dbus-python
+	source = superpaper-2.3.2.tar.gz::https://github.com/mauro-lanza/superpaper-next/archive/v2.3.2.tar.gz
+	source = rename_system_hotkey_dep.patch
+	sha256sums = 9d47b9b0c4c445c0839ae87d80556a22f6b2b793a1122c34e296a7e393e2ae86
+	sha256sums = 82388e2c46a43a53d84372cb5b45be10ad7f18de48e658ac2226c7ec2d42cd15
+
+pkgname = superpaper

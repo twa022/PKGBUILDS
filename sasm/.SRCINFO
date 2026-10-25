@@ -1,0 +1,17 @@
+pkgbase = sasm
+	pkgdesc = Simple crossplatform IDE for NASM, GAS, FASM assembly languages
+	pkgver = 3.16.0
+	pkgrel = 1
+	url = http://dman95.github.io/SASM/english.html
+	arch = i686
+	arch = x86_64
+	license = GPL3
+	depends = qt5-base
+	depends = nasm
+	depends = gdb
+	depends = gcc
+	depends = fasm
+	source = sasm-3.16.0.tar.gz::https://github.com/Dman95/SASM/archive/v3.16.0.tar.gz
+	sha256sums = 5a5d42bb8c256d4368b9ed7dcd0f42579f88c55a71ddf75f71c49fc7af32ea6c
+
+pkgname = sasm

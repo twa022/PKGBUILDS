@@ -1,0 +1,42 @@
+# Maintainer: éclairevoyant
+
+_pkgname=qt6ct
+pkgname="$_pkgname-git"
+epoch=2
+pkgver=r196+527617c
+pkgrel=1
+pkgdesc='Qt6 Configuration Tool'
+arch=('x86_64')
+url="https://github.com/Vikggan/qt6ct"
+license=('BSD-2-Clause')
+depends=(glibc
+         libgcc
+         libstdc++
+         qt6-base
+         qt6-svg)
+makedepends=(cmake
+             git
+             qt6-tools)
+provides=("$_pkgname")
+conflicts=("$_pkgname")
+source=("git+$url.git")
+sha256sums=('SKIP')
+
+pkgver() {
+  cd "${_pkgname}"
+  #git describe --long | sed 's/\([^-]*-\)g/r\1/;s/-/./g'
+  printf "r%s+%s" \
+    $( git rev-list --count HEAD ) \
+    $( git rev-parse --short HEAD )
+}
+
+build() {
+  cmake -B build -S ${_pkgname} \
+    -DCMAKE_INSTALL_PREFIX=/usr
+  cmake --build build
+}
+
+package() {
+  DESTDIR="$pkgdir" cmake --install build
+  install -Dm644 ${_pkgname}/COPYING "$pkgdir"/usr/share/licenses/$pkgname/LICENSE
+}
