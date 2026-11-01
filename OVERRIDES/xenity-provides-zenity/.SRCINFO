@@ -1,0 +1,12 @@
+pkgbase = xenity-provides-zenity
+	pkgdesc = Run zenity as xenity
+	pkgver = 1
+	pkgrel = 1
+	url = none
+	arch = any
+	license = GPL-2.0-or-later
+	depends = xenity
+	provides = zenity
+	conflicts = zenity
+
+pkgname = xenity-provides-zenity
